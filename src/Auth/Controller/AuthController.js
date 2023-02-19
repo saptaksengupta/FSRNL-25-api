@@ -30,8 +30,32 @@ const signUp = async (req, res) => {
     }
 };
 
-const signIn = async (req, resp) => {
+const signIn = async (req, res) => {
 
+    const { phone, password } = req.body;
+
+    try {
+        // If this user exists or not 
+        const existingUser = await User.findOne({phone: phone});
+        if (!existingUser) {
+            return res.status(404).json({message: "User not found!"});
+        }
+
+        // If exists, then check password is valid or not 
+        const matchPassword = await bcrypt.compare(password, existingUser.password);
+        if (!matchPassword) {
+            return res.status(400).json({message: "Invalid Credentials!"});
+        }
+
+        // Generate a JWT token for user
+        const token = jwt.sign({phone: existingUser.phone, id: existingUser.id}, FSRNL_AUTH_TOKEN);
+
+        // return the user details and token along with the response
+        return res.status(200).json({user: existingUser, token: token});
+    } catch(err) {
+        console.log(err);
+        res.status(500).json({message: "Something went wrong!"});
+    }
 };
 
 module.exports = {signUp, signIn}

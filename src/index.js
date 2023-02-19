@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const authRoutes = require('./Auth/Routes');
+const blogRoutes = require('./blog/Routes');
 
 const connectDb = require('./db/Connection');
 
@@ -19,7 +20,7 @@ myApp.use(bodyParser.json());
 
 // Route Redirections.
 myApp.use('/auth', authRoutes);
-
+myApp.use('/blogs', blogRoutes);
 
 // Setting up database connection!
 connectDb().then(() => {
