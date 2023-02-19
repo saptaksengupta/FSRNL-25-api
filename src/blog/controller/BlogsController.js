@@ -18,12 +18,12 @@ const createBlog = async (req, res) => {
     const {title, content} = req.body;
 
     if (!title) {
-        return res.status(500).json({message: "Title must be present!"});
+        return res.status(400).json({message: "Title must be present!"});
 
     }
 
     if (!content) {
-        return res.status(500).json({message: "Content is missing!"});
+        return res.status(400).json({message: "Content is missing!"});
     }
 
     try {
