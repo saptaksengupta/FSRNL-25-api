@@ -3,6 +3,8 @@ const { FSRNL_AUTH_TOKEN } = require('../Common/Constants');
 
 const auth = (req, res, next) => {
     try {
+        const fullUrl = req.protocol + '://' + req.get('host') + req.originalUrl;
+        console.log(`${fullUrl}`);
         let token = req.headers.authorization;
         if (!token) {
             return res.status(401).json({message: "Unauthorized User!"});

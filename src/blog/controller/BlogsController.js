@@ -5,7 +5,6 @@ const getBlogs = async (req, res) => {
     const { userId } = req;
     try {
         const result = await Blog.find().sort({time: 'desc'});
-        console.log(result);
         return await res.status(200).json({blogs: result});
     } catch(err) {
         console.log(err);

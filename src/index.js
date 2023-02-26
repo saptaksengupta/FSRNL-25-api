@@ -17,13 +17,6 @@ myApp.use(cors({
 
 myApp.use(bodyParser.json());
 
-myApp.use('/', (req, resp) => {
-    return resp.json({
-        message: 'Api deployed!',
-        code: 200
-    })
-})
-
 // Route Redirections.
 myApp.use('/auth', authRoutes);
 myApp.use('/blogs', blogRoutes);
