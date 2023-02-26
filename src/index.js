@@ -8,7 +8,7 @@ const connectDb = require('./db/Connection');
 
 // App initialization
 const myApp =  express();
-const port = 8081;
+const port = process.env.PORT || 8081;
 
 myApp.use(cors({
     origin: "*",
