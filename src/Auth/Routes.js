@@ -3,7 +3,7 @@ const { signUp, signIn } = require('./Controller/AuthController');
 const express = require('express');
 const router = express.Router();
 
-// SignIn
+// SignIn routes.
 router.post("/signin", signIn);
 
 // SignUp
